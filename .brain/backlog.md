@@ -5,6 +5,7 @@ Status values: `next`, `planned`, `in-progress`, `review`, `blocked`, `done`.
 ## Done
 
 - [x] **BP-000 — Agent workflow and Obsidian memory** (`done`) — [[features/BP-000-agent-workflow|feature note]] and [[reviews/BP-000-agent-workflow|review evidence]].
+- [x] **BP-002 — Create the initial iOS app** (`done`) — [[features/BP-002-xcode-project|feature note and review evidence]].
 
 ## Next
 
@@ -16,7 +17,6 @@ Status values: `next`, `planned`, `in-progress`, `review`, `blocked`, `done`.
 
 ## Later
 
-- [ ] **BP-002 — Create the initial iOS app** (`blocked by BP-001`)
 - [ ] **BP-003 — Add the first local-only finance workflow** (`blocked by BP-001`)
 
 ## Ideas needing discussion

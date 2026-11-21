@@ -14,7 +14,7 @@ A personal iPhone app that helps the user understand and plan their expenses. Th
 
 ## Current state
 
-Repository initialization only. There is no Xcode project, application architecture, data model, or test suite yet.
+The repository contains a native SwiftUI Xcode project with a provisional launch screen, unit/UI smoke tests, and no third-party dependencies. The finance model, persistence layer, and product workflows have not been designed or implemented.
 
 ## Development environment
 

@@ -8,21 +8,21 @@ updated: 2026-11-21
 
 ## Where we are
 
-The planner → developer → reviewer workflow and this Obsidian memory passed independent review and planner acceptance. There is no application code or Xcode project yet.
+[[features/BP-002-xcode-project|BP-002]] is complete and planner-accepted. The native SwiftUI project builds on the iPhone 17 iOS 26.5 simulator; both unit and UI smoke tests pass, and independent review found no issues.
 
 ## Active feature
 
-None. [[features/BP-000-agent-workflow|BP-000]] is complete; start future sessions with `kimi --agent planner`.
+None. The Xcode project contains only the provisional launch screen and test foundation.
 
 ## Next action
 
-Define the smallest useful finance MVP, its acceptance criteria, and the initial Xcode project scope in [[backlog|BP-001]].
+Continue [[backlog|BP-001]] by asking the user about the finance problem, required workflow, currency, privacy, and backup behavior before implementing BP-003.
 
 ## Environment confirmed
 
 - Repository branch: `main`; GitHub remote: `origin`.
-- Xcode 27.2 and iOS simulators are installed.
-- Physical iPhone signing, deployment, and device testing have not been verified.
+- Xcode 27.2 (27B52) and the iPhone 17 iOS 26.5 simulator successfully built and tested the app.
+- Physical iPhone signing, deployment, and device testing have not been verified and are out of BP-002 scope.
 
 ## Open product questions
 
