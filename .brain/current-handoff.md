@@ -1,5 +1,5 @@
 ---
-status: ready-for-bp-004
+status: ready
 active_feature: none
 updated: 2026-11-23
 ---
@@ -8,15 +8,15 @@ updated: 2026-11-23
 
 ## Where we are
 
-[[features/BP-003-local-finance-core|BP-003]] is complete and planner-accepted. SwiftData finance models and the pure Decimal budget engine are implemented. Independent review found no issues; the simulator build passed and all 15 tests passed (14 unit, 1 UI).
+[[features/BP-004-exchange-rates|BP-004]] is complete and planner-accepted. The app now has a public CNY/COP exchange-rate service with validated responses, timestamped local SwiftData snapshots, offline cache fallback, manual rates, and explicit source metadata. Independent review passed; the simulator build succeeded and all 30 tests passed (29 unit, 1 UI). The provisional UI remains unchanged.
 
 ## Active feature
 
-None. [[features/BP-001-finance-mvp|BP-001]] contains the accepted MVP roadmap. The provisional UI remains unchanged.
+No active feature.
 
 ## Next action
 
-Start BP-004: public CNY/COP exchange-rate fetching without financial data, local timestamped caching, and manual offline rates. Then continue with BP-005 management screens and BP-006 home/quick expenses.
+Plan and implement BP-005 income, period, obligation, and savings-goal management screens, followed by BP-006 home and quick CNY expenses.
 
 ## Environment confirmed
 

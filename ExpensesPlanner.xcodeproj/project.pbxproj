@@ -16,6 +16,8 @@
 		B10000000000000000000007 /* FinanceModelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000032 /* FinanceModelContainer.swift */; };
 		B10000000000000000000008 /* BudgetEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000033 /* BudgetEngineTests.swift */; };
 		B10000000000000000000009 /* FinancePersistenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000034 /* FinancePersistenceTests.swift */; };
+		B10000000000000000000010 /* ExchangeRates.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000035 /* ExchangeRates.swift */; };
+		B10000000000000000000011 /* ExchangeRateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000036 /* ExchangeRateTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,8 @@
 		A10000000000000000000032 /* FinanceModelContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceModelContainer.swift; sourceTree = "<group>"; };
 		A10000000000000000000033 /* BudgetEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BudgetEngineTests.swift; sourceTree = "<group>"; };
 		A10000000000000000000034 /* FinancePersistenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinancePersistenceTests.swift; sourceTree = "<group>"; };
+		A10000000000000000000035 /* ExchangeRates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRates.swift; sourceTree = "<group>"; };
+		A10000000000000000000036 /* ExchangeRateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +107,7 @@
 				A10000000000000000000030 /* FinanceModels.swift */,
 				A10000000000000000000031 /* BudgetEngine.swift */,
 				A10000000000000000000032 /* FinanceModelContainer.swift */,
+				A10000000000000000000035 /* ExchangeRates.swift */,
 			);
 			path = ExpensesPlanner;
 			sourceTree = "<group>";
@@ -113,6 +118,7 @@
 				A10000000000000000000006 /* ExpensesPlannerTests.swift */,
 				A10000000000000000000033 /* BudgetEngineTests.swift */,
 				A10000000000000000000034 /* FinancePersistenceTests.swift */,
+				A10000000000000000000036 /* ExchangeRateTests.swift */,
 			);
 			path = ExpensesPlannerTests;
 			sourceTree = "<group>";
@@ -258,6 +264,7 @@
 				B10000000000000000000005 /* FinanceModels.swift in Sources */,
 				B10000000000000000000006 /* BudgetEngine.swift in Sources */,
 				B10000000000000000000007 /* FinanceModelContainer.swift in Sources */,
+				B10000000000000000000010 /* ExchangeRates.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,6 +275,7 @@
 				B10000000000000000000003 /* ExpensesPlannerTests.swift in Sources */,
 				B10000000000000000000008 /* BudgetEngineTests.swift in Sources */,
 				B10000000000000000000009 /* FinancePersistenceTests.swift in Sources */,
+				B10000000000000000000011 /* ExchangeRateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -148,4 +148,27 @@ final class FinancePersistenceTests: XCTestCase {
         XCTAssertEqual(fetched.period?.id, period.id)
         XCTAssertEqual(fetched.period?.expenses.map(\.id), [id])
     }
+
+    func testExchangeRateSnapshotRoundTripPreservesRateTimestampAndOriginMetadata() throws {
+        let id = UUID()
+        let timestamp = Date(timeIntervalSince1970: 1_767_398_400)
+        let snapshot = try ExchangeRateSnapshot(
+            id: id,
+            rateCOPPerCNY: Decimal(string: "4012.345678")!,
+            timestamp: timestamp,
+            provider: "https://www.exchangerate-api.com",
+            source: "https://open.er-api.com/v6/latest/CNY",
+            origin: .network
+        )
+        context.insert(snapshot)
+        try context.save()
+
+        let fetched = try XCTUnwrap(context.fetch(FetchDescriptor<ExchangeRateSnapshot>()).first)
+        XCTAssertEqual(fetched.id, id)
+        XCTAssertEqual(fetched.rateCOPPerCNY, Decimal(string: "4012.345678")!)
+        XCTAssertEqual(fetched.timestamp, timestamp)
+        XCTAssertEqual(fetched.provider, "https://www.exchangerate-api.com")
+        XCTAssertEqual(fetched.source, "https://open.er-api.com/v6/latest/CNY")
+        XCTAssertEqual(fetched.origin, .network)
+    }
 }

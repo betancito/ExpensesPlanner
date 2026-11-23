@@ -7,6 +7,7 @@ enum FinanceModelContainer {
         PeriodObligation.self,
         SavingsGoal.self,
         CNYExpense.self,
+        ExchangeRateSnapshot.self,
     ]
 
     static func makeContainer(inMemory: Bool = false) throws -> ModelContainer {

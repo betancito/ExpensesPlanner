@@ -8,11 +8,14 @@ Status values: `next`, `planned`, `in-progress`, `review`, `blocked`, `done`.
 - [x] **BP-001 — Define the personal finance MVP** (`done`) — [[features/BP-001-finance-mvp|accepted scope and roadmap]].
 - [x] **BP-002 — Create the initial iOS app** (`done`) — [[features/BP-002-xcode-project|feature note and review evidence]].
 - [x] **BP-003 — Local finance models and budget engine** (`done`) — [[features/BP-003-local-finance-core|feature note and review evidence]].
+- [x] **BP-004 — Public, cached, and manual CNY-COP exchange rates** (`done`) — [[features/BP-004-exchange-rates|feature note and review evidence]].
+
+## In progress
+
+No active feature.
 
 ## Next
-
-- [ ] **BP-004 — Public, cached, and manual CNY-COP exchange rates** (`planned`)
-- [ ] **BP-005 — Income, period, obligation, and savings-goal management screens** (`planned`)
+- [ ] **BP-005 — Income, period, obligation, and savings-goal management screens** (`next`)
 - [ ] **BP-006 — Home budget and quick CNY expense workflow** (`planned`)
 
 ## Later

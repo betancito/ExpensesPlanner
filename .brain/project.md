@@ -15,7 +15,7 @@ A personal iPhone app that helps the user understand and plan their expenses. Th
 
 ## Current state
 
-The repository contains a native SwiftUI/Xcode project, SwiftData finance models, a pure Decimal budget engine, and unit/UI tests with no third-party dependencies. The provisional launch screen is unchanged; exchange-rate networking and production finance workflows are not implemented yet.
+The repository contains a native SwiftUI/Xcode project, SwiftData finance models, a pure Decimal budget engine, a validated CNY/COP exchange-rate service with local caching and manual fallback, and unit/UI tests with no third-party dependencies. The provisional launch screen is unchanged; production finance workflows and exchange-rate selection UI are not implemented yet.
 
 ## Development environment
 
