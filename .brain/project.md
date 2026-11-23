@@ -9,18 +9,19 @@ A personal iPhone app that helps the user understand and plan their expenses. Th
 - Native iOS development using Xcode.
 - Financial data stays in the app's local storage.
 - No backend, account system, analytics, or cloud sync unless the user explicitly changes this direction.
+- Public exchange-rate requests are allowed, but they must not contain financial data; cached and manual rates support offline use.
 - Keep the first version small and testable.
 - Do not publish or distribute the app without an explicit request.
 
 ## Current state
 
-The repository contains a native SwiftUI Xcode project with a provisional launch screen, unit/UI smoke tests, and no third-party dependencies. The finance model, persistence layer, and product workflows have not been designed or implemented.
+The repository contains a native SwiftUI/Xcode project, SwiftData finance models, a pure Decimal budget engine, and unit/UI tests with no third-party dependencies. The provisional launch screen is unchanged; exchange-rate networking and production finance workflows are not implemented yet.
 
 ## Development environment
 
 - macOS with Xcode 27.2 confirmed on 2026-11-21.
 - iOS 26.5 and 27.2 simulators are available.
-- Physical-device deployment and Apple signing configuration are not yet confirmed.
+- Target personal device: iPhone 16 Pro with iOS 26.6.2; physical deployment and Apple signing configuration are not yet confirmed.
 
 ## Working agreements
 

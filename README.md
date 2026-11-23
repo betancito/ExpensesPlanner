@@ -4,7 +4,7 @@ A personal iPhone expenses-planning app. Financial data is stored locally in the
 
 ## Open, build, and test the iOS app
 
-The project uses SwiftUI and XCTest without third-party dependencies. It currently contains only a provisional launch screen, a unit-test target, and a UI-test target. Xcode 27.2 is the verified toolchain; the app's deployment target is iOS 17.0.
+The project uses SwiftUI, SwiftData, and XCTest without third-party dependencies. It currently contains a provisional launch screen, local finance models with a pure budget engine, a unit-test target, and a UI-test target. Xcode 27.2 is the verified toolchain; the app's deployment target is iOS 17.0.
 
 Open the project in Xcode:
 

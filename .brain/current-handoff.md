@@ -1,31 +1,32 @@
 ---
-status: ready-for-mvp-planning
+status: ready-for-bp-004
 active_feature: none
-updated: 2026-11-21
+updated: 2026-11-23
 ---
 
 # Current handoff
 
 ## Where we are
 
-[[features/BP-002-xcode-project|BP-002]] is complete and planner-accepted. The native SwiftUI project builds on the iPhone 17 iOS 26.5 simulator; both unit and UI smoke tests pass, and independent review found no issues.
+[[features/BP-003-local-finance-core|BP-003]] is complete and planner-accepted. SwiftData finance models and the pure Decimal budget engine are implemented. Independent review found no issues; the simulator build passed and all 15 tests passed (14 unit, 1 UI).
 
 ## Active feature
 
-None. The Xcode project contains only the provisional launch screen and test foundation.
+None. [[features/BP-001-finance-mvp|BP-001]] contains the accepted MVP roadmap. The provisional UI remains unchanged.
 
 ## Next action
 
-Continue [[backlog|BP-001]] by asking the user about the finance problem, required workflow, currency, privacy, and backup behavior before implementing BP-003.
+Start BP-004: public CNY/COP exchange-rate fetching without financial data, local timestamped caching, and manual offline rates. Then continue with BP-005 management screens and BP-006 home/quick expenses.
 
 ## Environment confirmed
 
 - Repository branch: `main`; GitHub remote: `origin`.
 - Xcode 27.2 (27B52) and the iPhone 17 iOS 26.5 simulator successfully built and tested the app.
-- Physical iPhone signing, deployment, and device testing have not been verified and are out of BP-002 scope.
+- Target device: iPhone 16 Pro with iOS 26.6.2; physical signing and deployment remain pending.
 
-## Open product questions
+## Product decisions
 
-- Which finance problem should the first version solve?
-- What information must be entered, calculated, and shown?
-- Which currency, date, privacy, and backup behavior is required?
+- Only manually confirmed income contributes to safe spending.
+- Public rate fetches contain no financial data; cached and manual rates support offline use.
+- Expenses retain their entry-time CNY amount, exchange rate, and COP value.
+- Debts are outside the MVP.
