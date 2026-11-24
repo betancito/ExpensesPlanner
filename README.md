@@ -4,7 +4,7 @@ A personal iPhone expenses-planning app. Financial data is stored locally in the
 
 ## Open, build, and test the iOS app
 
-The project uses SwiftUI, SwiftData, and XCTest without third-party dependencies. It currently contains a provisional launch screen, local finance models with a pure budget engine, a unit-test target, and a UI-test target. Xcode 27.2 is the verified toolchain; the app's deployment target is iOS 17.0.
+The project uses SwiftUI, SwiftData, and XCTest without third-party dependencies. It contains Spanish management workflows for flexible budget periods, confirmed COP income, period obligations, and savings goals; local finance models with a pure budget engine; a public/cached/manual CNY/COP exchange-rate service; a unit-test target; and a UI-test target. Xcode 27.2 is the verified toolchain; the app's deployment target is iOS 17.0.
 
 Open the project in Xcode:
 
@@ -36,13 +36,21 @@ xcodebuild -project ExpensesPlanner.xcodeproj \
 
 Use `xcrun simctl list devices available` to find another installed simulator and adjust the destination's name and OS if needed.
 
+## Spanish management workflows
+
+The **Períodos** tab creates and edits arbitrary start/end date ranges rather than fixed pay schedules. Each period manages multiple confirmed COP incomes with received dates and named variable obligations. It displays confirmed income, obligations, and `confirmed income - obligations` in COP before savings and expenses. Invalid amounts and reversed date ranges are rejected before saving.
+
+The **Metas** tab manages savings goals with a positive COP target, optional target date, nonnegative saved amount, and nonnegative planned per-period allocation. It shows COP values and clamped savings progress. Planned allocations do not create automatic transfers or expected income.
+
+All money input is parsed as `Decimal` with Spanish locale-aware separators, and all changes use the existing local SwiftData container. Destructive actions require confirmation; deleting a period explicitly warns that its incomes, obligations, and associated expenses cascade. Unit tests cover validation, calculations, and persistence. UI tests exercise creation/editing, invalid forms, COP totals, navigation, destructive confirmations, optional target dates, and process termination/relaunch persistence. No home budget, CNY expense-entry UI, charts, debts, backend, or exchange-rate controls are included in these workflows.
+
 ## CNY/COP exchange rates
 
 The exchange-rate service requests only `https://open.er-api.com/v6/latest/CNY`. This is the public [ExchangeRate-API](https://www.exchangerate-api.com) endpoint; no API key, credentials, account data, budget data, expenses, or other financial information are included in the request. Requests use an ephemeral `URLSession` and a 15-second timeout.
 
 Successful responses are validated for a successful provider result, a CNY base currency, a positive finite Decimal COP-per-CNY rate, and the provider's update timestamp. Each successful refresh saves a local SwiftData snapshot containing the rate, timestamp, provider attribution, endpoint source, and network origin. If refresh fails, the service returns the newest locally saved snapshot and leaves the cache unchanged.
 
-A positive finite manual COP-per-CNY rate can also be saved for offline use. Manual snapshots use the device's local timestamp and explicit manual-origin metadata. Results expose the rate timestamp, provider/source, network-versus-manual origin, and whether the value came from the network, cache, or manual entry so future UI can label it accurately. The provisional UI does not currently display or select exchange rates.
+A positive finite manual COP-per-CNY rate can also be saved for offline use. Manual snapshots use the device's local timestamp and explicit manual-origin metadata. Results expose the rate timestamp, provider/source, network-versus-manual origin, and whether the value came from the network, cache, or manual entry so future UI can label it accurately. BP-005 intentionally does not display or select exchange rates.
 
 All exchange-rate tests use injected mocked transport and clocks; they do not access the real network.
 

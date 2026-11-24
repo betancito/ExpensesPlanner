@@ -18,6 +18,10 @@
 		B10000000000000000000009 /* FinancePersistenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000034 /* FinancePersistenceTests.swift */; };
 		B10000000000000000000010 /* ExchangeRates.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000035 /* ExchangeRates.swift */; };
 		B10000000000000000000011 /* ExchangeRateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000036 /* ExchangeRateTests.swift */; };
+		B10000000000000000000012 /* ManagementSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000037 /* ManagementSupport.swift */; };
+		B10000000000000000000013 /* PeriodManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000038 /* PeriodManagementView.swift */; };
+		B10000000000000000000014 /* SavingsGoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000039 /* SavingsGoalsView.swift */; };
+		B10000000000000000000015 /* ManagementValidationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000040 /* ManagementValidationTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +56,10 @@
 		A10000000000000000000034 /* FinancePersistenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinancePersistenceTests.swift; sourceTree = "<group>"; };
 		A10000000000000000000035 /* ExchangeRates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRates.swift; sourceTree = "<group>"; };
 		A10000000000000000000036 /* ExchangeRateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeRateTests.swift; sourceTree = "<group>"; };
+		A10000000000000000000037 /* ManagementSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementSupport.swift; sourceTree = "<group>"; };
+		A10000000000000000000038 /* PeriodManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodManagementView.swift; sourceTree = "<group>"; };
+		A10000000000000000000039 /* SavingsGoalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsGoalsView.swift; sourceTree = "<group>"; };
+		A10000000000000000000040 /* ManagementValidationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementValidationTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +116,9 @@
 				A10000000000000000000031 /* BudgetEngine.swift */,
 				A10000000000000000000032 /* FinanceModelContainer.swift */,
 				A10000000000000000000035 /* ExchangeRates.swift */,
+				A10000000000000000000037 /* ManagementSupport.swift */,
+				A10000000000000000000038 /* PeriodManagementView.swift */,
+				A10000000000000000000039 /* SavingsGoalsView.swift */,
 			);
 			path = ExpensesPlanner;
 			sourceTree = "<group>";
@@ -119,6 +130,7 @@
 				A10000000000000000000033 /* BudgetEngineTests.swift */,
 				A10000000000000000000034 /* FinancePersistenceTests.swift */,
 				A10000000000000000000036 /* ExchangeRateTests.swift */,
+				A10000000000000000000040 /* ManagementValidationTests.swift */,
 			);
 			path = ExpensesPlannerTests;
 			sourceTree = "<group>";
@@ -265,6 +277,9 @@
 				B10000000000000000000006 /* BudgetEngine.swift in Sources */,
 				B10000000000000000000007 /* FinanceModelContainer.swift in Sources */,
 				B10000000000000000000010 /* ExchangeRates.swift in Sources */,
+				B10000000000000000000012 /* ManagementSupport.swift in Sources */,
+				B10000000000000000000013 /* PeriodManagementView.swift in Sources */,
+				B10000000000000000000014 /* SavingsGoalsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,6 +291,7 @@
 				B10000000000000000000008 /* BudgetEngineTests.swift in Sources */,
 				B10000000000000000000009 /* FinancePersistenceTests.swift in Sources */,
 				B10000000000000000000011 /* ExchangeRateTests.swift in Sources */,
+				B10000000000000000000015 /* ManagementValidationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

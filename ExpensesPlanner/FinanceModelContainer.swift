@@ -15,4 +15,16 @@ enum FinanceModelContainer {
         let configuration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: inMemory)
         return try ModelContainer(for: schema, configurations: [configuration])
     }
+
+    #if DEBUG
+    static func deleteAllLocalData(in context: ModelContext) throws {
+        try context.delete(model: BudgetPeriod.self)
+        try context.delete(model: ConfirmedIncome.self)
+        try context.delete(model: PeriodObligation.self)
+        try context.delete(model: SavingsGoal.self)
+        try context.delete(model: CNYExpense.self)
+        try context.delete(model: ExchangeRateSnapshot.self)
+        try context.save()
+    }
+    #endif
 }

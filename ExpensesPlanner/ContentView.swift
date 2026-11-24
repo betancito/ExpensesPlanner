@@ -1,26 +1,31 @@
 import SwiftUI
 
 struct ContentView: View {
-    static let title = "ExpensesPlanner"
-    static let message = "Your expense planning workspace is ready."
+    static let title = "Mi plan"
 
     var body: some View {
-        VStack(spacing: 12) {
-            Text(Self.title)
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .accessibilityIdentifier("provisionalTitle")
+        TabView {
+            NavigationStack {
+                PeriodsView()
+            }
+            .tabItem {
+                Label("Períodos", systemImage: "calendar")
+            }
+            .accessibilityIdentifier("periodsTab")
 
-            Text(Self.message)
-                .font(.body)
-                .foregroundStyle(.secondary)
-                .multilineTextAlignment(.center)
-                .accessibilityIdentifier("provisionalMessage")
+            NavigationStack {
+                SavingsGoalsView()
+            }
+            .tabItem {
+                Label("Metas", systemImage: "target")
+            }
+            .accessibilityIdentifier("goalsTab")
         }
-        .padding()
+        .tint(.indigo)
     }
 }
 
 #Preview {
     ContentView()
+        .modelContainer(try! FinanceModelContainer.makeContainer(inMemory: true))
 }

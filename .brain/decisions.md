@@ -2,6 +2,20 @@
 
 Record only durable decisions. Newest entries go first; do not rewrite history without noting why.
 
+## D-008 — Roll daily budget balances into the next day
+
+- Date: 2026-11-24
+- Status: accepted
+- Decision: Default new coverage periods to 15 days while retaining custom dates. Calculate a base daily allowance from the period's flexible spending, then carry the previous day's unused allowance forward or subtract its overspending from the next day. The home shows the total period budget, base daily budget, and actual amount available today in CNY; negative available funds never produce a negative spending recommendation.
+- Reason: The user wants daily discipline without losing unused money and wants overspending to reduce the following day's available budget automatically.
+
+## D-007 — Track local checking and savings asset accounts
+
+- Date: 2026-11-24
+- Status: accepted
+- Decision: Add an Assets tab for manually maintained accounts with custom names, checking/savings type, COP/CNY currency, and current balance. Checking represents money for daily use; savings represents accumulated savings. Show totals grouped by currency, without bank connections or remote financial storage. Account balances are tracking records and do not create income, savings-goal progress, or expense transactions automatically.
+- Reason: The user needs to separate money held in different accounts and distinguish spendable checking funds from accumulated savings without duplicating budget transactions.
+
 ## D-006 — Calculate safe budgets from confirmed income only
 
 - Date: 2026-11-22

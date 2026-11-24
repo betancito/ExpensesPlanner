@@ -171,4 +171,24 @@ final class FinancePersistenceTests: XCTestCase {
         XCTAssertEqual(fetched.source, "https://open.er-api.com/v6/latest/CNY")
         XCTAssertEqual(fetched.origin, .network)
     }
+
+    func testDeletingPeriodCascadesIncomesObligationsAndExpenses() throws {
+        let period = BudgetPeriod(startDate: Date(timeIntervalSince1970: 1_767_225_600), endDate: Date(timeIntervalSince1970: 1_768_003_200))
+        let unrelatedPeriod = BudgetPeriod(startDate: Date(timeIntervalSince1970: 1_768_003_200), endDate: Date(timeIntervalSince1970: 1_768_780_800))
+        context.insert(period)
+        context.insert(unrelatedPeriod)
+        context.insert(ConfirmedIncome(amountCOP: Decimal(1_000), receivedAt: .now, period: period))
+        context.insert(PeriodObligation(name: "Rent", amountCOP: Decimal(500), period: period))
+        context.insert(try CNYExpense(amountCNY: 1, exchangeRateCOPPerCNY: 4_000, timestamp: .now, category: "Food", period: period))
+        context.insert(ConfirmedIncome(amountCOP: Decimal(2_000), receivedAt: .now, period: unrelatedPeriod))
+        try context.save()
+
+        context.delete(period)
+        try context.save()
+
+        XCTAssertEqual(try context.fetch(FetchDescriptor<BudgetPeriod>()).map(\.id), [unrelatedPeriod.id])
+        XCTAssertEqual(try context.fetch(FetchDescriptor<ConfirmedIncome>()).count, 1)
+        XCTAssertEqual(try context.fetch(FetchDescriptor<PeriodObligation>()).count, 0)
+        XCTAssertEqual(try context.fetch(FetchDescriptor<CNYExpense>()).count, 0)
+    }
 }
