@@ -4,7 +4,7 @@ A personal iPhone expenses-planning app. Financial data is stored locally in the
 
 ## Open, build, and test the iOS app
 
-The project uses SwiftUI, SwiftData, and XCTest without third-party dependencies. It contains Spanish management workflows for flexible budget periods, confirmed COP income, period obligations, and savings goals; local finance models with a pure budget engine; a public/cached/manual CNY/COP exchange-rate service; a unit-test target; and a UI-test target. Xcode 27.2 is the verified toolchain; the app's deployment target is iOS 17.0.
+The project uses SwiftUI, SwiftData, and XCTest without third-party dependencies. It contains Spanish workflows for manual checking/savings asset accounts in COP/CNY, flexible budget periods, confirmed COP income, period obligations, and savings goals; local finance models with a pure budget engine; a public/cached/manual CNY/COP exchange-rate service; a unit-test target; and a UI-test target. Xcode 27.2 is the verified toolchain; the app's deployment target is iOS 17.0.
 
 Open the project in Xcode:
 
@@ -36,13 +36,15 @@ xcodebuild -project ExpensesPlanner.xcodeproj \
 
 Use `xcrun simctl list devices available` to find another installed simulator and adjust the destination's name and OS if needed.
 
-## Spanish management workflows
+## Spanish asset and management workflows
 
-The **Períodos** tab creates and edits arbitrary start/end date ranges rather than fixed pay schedules. Each period manages multiple confirmed COP incomes with received dates and named variable obligations. It displays confirmed income, obligations, and `confirmed income - obligations` in COP before savings and expenses. Invalid amounts and reversed date ranges are rejected before saving.
+The **Activos** tab creates, edits, lists, and deletes manually maintained accounts with a trimmed custom name, **Corriente**/**Ahorros** type, COP/CNY currency, and a nonnegative `Decimal` balance. Checking represents money for daily use; savings represents accumulated money. The summary shows checking and savings subtotals plus total assets separately in COP and CNY, without implicit currency conversion. Balances are independent manual tracking records: they do not create incomes, expenses, savings-goal progress, transfers, or bank synchronization.
 
-The **Metas** tab manages savings goals with a positive COP target, optional target date, nonnegative saved amount, and nonnegative planned per-period allocation. It shows COP values and clamped savings progress. Planned allocations do not create automatic transfers or expected income.
+The **Planificación** tab groups access to **Períodos** and **Metas de ahorro**. Periods create and edit arbitrary start/end date ranges rather than fixed pay schedules. Each period manages multiple confirmed COP incomes with received dates and named variable obligations. It displays confirmed income, obligations, and `confirmed income - obligations` in COP before savings and expenses. Invalid amounts and reversed date ranges are rejected before saving.
 
-All money input is parsed as `Decimal` with Spanish locale-aware separators, and all changes use the existing local SwiftData container. Destructive actions require confirmation; deleting a period explicitly warns that its incomes, obligations, and associated expenses cascade. Unit tests cover validation, calculations, and persistence. UI tests exercise creation/editing, invalid forms, COP totals, navigation, destructive confirmations, optional target dates, and process termination/relaunch persistence. No home budget, CNY expense-entry UI, charts, debts, backend, or exchange-rate controls are included in these workflows.
+Savings goals have a positive COP target, optional target date, nonnegative saved amount, and nonnegative planned per-period allocation. The UI shows COP values and clamped savings progress. Planned allocations do not create automatic transfers or expected income.
+
+All money input is parsed as `Decimal` with Spanish locale-aware separators, and all changes use the existing local SwiftData container. Destructive actions require confirmation; deleting a period explicitly warns that its incomes, obligations, and associated expenses cascade. Unit tests cover asset validation and totals, management validation, calculations, and persistence. UI tests exercise asset and management creation/editing, invalid forms, type/currency subtotals, navigation, destructive confirmations, optional target dates, and process termination/relaunch persistence. No home budget, rollover, CNY expense-entry UI, consolidated currency conversion, transfers, charts, debts, backend, bank connections, or exchange-rate controls are included in these workflows.
 
 ## CNY/COP exchange rates
 

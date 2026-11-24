@@ -45,7 +45,7 @@ struct PeriodsView: View {
                 }
             }
         }
-        .navigationTitle(ContentView.title)
+        .navigationTitle("Períodos")
         .accessibilityIdentifier("managementTitle")
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {

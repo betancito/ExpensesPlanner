@@ -22,6 +22,8 @@
 		B10000000000000000000013 /* PeriodManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000038 /* PeriodManagementView.swift */; };
 		B10000000000000000000014 /* SavingsGoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000039 /* SavingsGoalsView.swift */; };
 		B10000000000000000000015 /* ManagementValidationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000040 /* ManagementValidationTests.swift */; };
+		B10000000000000000000016 /* AssetAccountsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000041 /* AssetAccountsView.swift */; };
+		B10000000000000000000017 /* AssetAccountTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000042 /* AssetAccountTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,8 @@
 		A10000000000000000000038 /* PeriodManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodManagementView.swift; sourceTree = "<group>"; };
 		A10000000000000000000039 /* SavingsGoalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsGoalsView.swift; sourceTree = "<group>"; };
 		A10000000000000000000040 /* ManagementValidationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementValidationTests.swift; sourceTree = "<group>"; };
+		A10000000000000000000041 /* AssetAccountsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetAccountsView.swift; sourceTree = "<group>"; };
+		A10000000000000000000042 /* AssetAccountTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetAccountTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +123,7 @@
 				A10000000000000000000037 /* ManagementSupport.swift */,
 				A10000000000000000000038 /* PeriodManagementView.swift */,
 				A10000000000000000000039 /* SavingsGoalsView.swift */,
+				A10000000000000000000041 /* AssetAccountsView.swift */,
 			);
 			path = ExpensesPlanner;
 			sourceTree = "<group>";
@@ -131,6 +136,7 @@
 				A10000000000000000000034 /* FinancePersistenceTests.swift */,
 				A10000000000000000000036 /* ExchangeRateTests.swift */,
 				A10000000000000000000040 /* ManagementValidationTests.swift */,
+				A10000000000000000000042 /* AssetAccountTests.swift */,
 			);
 			path = ExpensesPlannerTests;
 			sourceTree = "<group>";
@@ -280,6 +286,7 @@
 				B10000000000000000000012 /* ManagementSupport.swift in Sources */,
 				B10000000000000000000013 /* PeriodManagementView.swift in Sources */,
 				B10000000000000000000014 /* SavingsGoalsView.swift in Sources */,
+				B10000000000000000000016 /* AssetAccountsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,6 +299,7 @@
 				B10000000000000000000009 /* FinancePersistenceTests.swift in Sources */,
 				B10000000000000000000011 /* ExchangeRateTests.swift in Sources */,
 				B10000000000000000000015 /* ManagementValidationTests.swift in Sources */,
+				B10000000000000000000017 /* AssetAccountTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

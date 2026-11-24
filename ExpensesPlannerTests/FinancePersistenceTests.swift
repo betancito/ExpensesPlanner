@@ -18,6 +18,48 @@ final class FinancePersistenceTests: XCTestCase {
         container = nil
     }
 
+    func testAssetAccountRoundTripSupportsEditsAndDeletion() throws {
+        let id = UUID()
+        let deletedID = UUID()
+        let account = AssetAccount(
+            id: id,
+            name: "Cuenta nómina",
+            type: .checking,
+            currency: .cop,
+            balance: Decimal(string: "1250000.75")!
+        )
+        context.insert(account)
+        context.insert(AssetAccount(
+            id: deletedID,
+            name: "Cuenta temporal",
+            type: .savings,
+            currency: .cny,
+            balance: Decimal(string: "50.25")!
+        ))
+        try context.save()
+
+        account.name = "Cuenta principal"
+        account.type = .savings
+        account.currency = .cny
+        account.balance = Decimal(string: "200.50")!
+        let temporary = try XCTUnwrap(context.fetch(FetchDescriptor<AssetAccount>()).first { $0.id == deletedID })
+        context.delete(temporary)
+        try context.save()
+
+        let newContext = ModelContext(container)
+        let fetched = try newContext.fetch(FetchDescriptor<AssetAccount>())
+        XCTAssertEqual(fetched.count, 1)
+        let persisted = try XCTUnwrap(fetched.first)
+        XCTAssertEqual(persisted.id, id)
+        XCTAssertEqual(persisted.name, "Cuenta principal")
+        XCTAssertEqual(persisted.type, .savings)
+        XCTAssertEqual(persisted.currency, .cny)
+        XCTAssertEqual(persisted.balance, Decimal(string: "200.50"))
+        XCTAssertTrue(try newContext.fetch(FetchDescriptor<ConfirmedIncome>()).isEmpty)
+        XCTAssertTrue(try newContext.fetch(FetchDescriptor<CNYExpense>()).isEmpty)
+        XCTAssertTrue(try newContext.fetch(FetchDescriptor<SavingsGoal>()).isEmpty)
+    }
+
     func testBudgetPeriodRoundTrip() throws {
         let id = UUID()
         let startDate = Date(timeIntervalSince1970: 1_767_225_600)

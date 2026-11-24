@@ -1,6 +1,71 @@
 import Foundation
 import SwiftData
 
+enum AssetAccountType: String, Codable, CaseIterable, Identifiable {
+    case checking
+    case savings
+
+    var id: String { rawValue }
+
+    var displayName: String {
+        switch self {
+        case .checking:
+            return "Corriente"
+        case .savings:
+            return "Ahorros"
+        }
+    }
+
+    var explanation: String {
+        switch self {
+        case .checking:
+            return "Dinero disponible para el uso diario."
+        case .savings:
+            return "Dinero acumulado como ahorro."
+        }
+    }
+}
+
+enum AssetCurrency: String, Codable, CaseIterable, Identifiable {
+    case cop = "COP"
+    case cny = "CNY"
+
+    var id: String { rawValue }
+}
+
+@Model
+final class AssetAccount {
+    @Attribute(.unique) var id: UUID
+    var name: String
+    private(set) var typeRawValue: String
+    private(set) var currencyRawValue: String
+    var balance: Decimal
+
+    var type: AssetAccountType {
+        get { AssetAccountType(rawValue: typeRawValue) ?? .checking }
+        set { typeRawValue = newValue.rawValue }
+    }
+
+    var currency: AssetCurrency {
+        get { AssetCurrency(rawValue: currencyRawValue) ?? .cop }
+        set { currencyRawValue = newValue.rawValue }
+    }
+
+    init(
+        id: UUID = UUID(),
+        name: String,
+        type: AssetAccountType,
+        currency: AssetCurrency,
+        balance: Decimal
+    ) {
+        self.id = id
+        self.name = name
+        self.typeRawValue = type.rawValue
+        self.currencyRawValue = currency.rawValue
+        self.balance = balance
+    }
+}
+
 @Model
 final class BudgetPeriod {
     @Attribute(.unique) var id: UUID

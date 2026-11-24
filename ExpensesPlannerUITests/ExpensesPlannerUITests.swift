@@ -16,11 +16,19 @@ final class ExpensesPlannerUITests: XCTestCase {
         launchResettingData()
 
         XCTAssertEqual(app.state, .runningForeground)
-        XCTAssertTrue(app.navigationBars["Mi plan"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.tabBars.buttons["Activos"].exists)
+        XCTAssertTrue(app.tabBars.buttons["Planificación"].exists)
+        XCTAssertTrue(app.navigationBars["Activos"].waitForExistence(timeout: 5))
+        XCTAssertTrue(element("assetsEmptyState").exists)
+        XCTAssertTrue(element("assetsManualTrackingNote").exists)
+        XCTAssertTrue(app.buttons["Nueva cuenta"].exists)
+
+        openPeriods()
         XCTAssertTrue(element("periodsEmptyState").exists)
         XCTAssertTrue(app.buttons["Nuevo período"].exists)
 
-        app.tabBars.buttons["Metas"].tap()
+        app.navigationBars.buttons["Planificación"].tap()
+        element("goalsNavigationLink").tap()
         XCTAssertTrue(app.navigationBars["Metas de ahorro"].waitForExistence(timeout: 5))
         XCTAssertTrue(element("goalsEmptyState").exists)
         XCTAssertTrue(app.buttons["Nueva meta"].exists)
@@ -28,6 +36,7 @@ final class ExpensesPlannerUITests: XCTestCase {
 
     func testPeriodIncomeAndObligationCRUDValidationTotalsAndRelaunch() {
         launchResettingData()
+        openPeriods()
 
         app.buttons["addPeriodButton"].tap()
         app.buttons["savePeriodButton"].tap()
@@ -82,6 +91,7 @@ final class ExpensesPlannerUITests: XCTestCase {
         app.terminate()
         app.launchArguments = []
         app.launch()
+        openPeriods()
         let persistedPeriod = element(prefix: "periodRow-")
         XCTAssertTrue(persistedPeriod.waitForExistence(timeout: 5))
         persistedPeriod.tap()
@@ -91,7 +101,7 @@ final class ExpensesPlannerUITests: XCTestCase {
         XCTAssertTrue(element("remainingFlexibleTotal").label.contains("1.300.000,00"))
         XCTAssertTrue(app.staticTexts["Arriendo"].exists)
 
-        app.navigationBars.buttons["Mi plan"].tap()
+        app.navigationBars.buttons["Períodos"].tap()
         let rowToDelete = element(prefix: "periodRow-")
         rowToDelete.swipeLeft()
         app.buttons["Eliminar"].tap()
@@ -106,9 +116,92 @@ final class ExpensesPlannerUITests: XCTestCase {
         XCTAssertTrue(element("periodsEmptyState").waitForExistence(timeout: 5))
     }
 
+    func testAssetAccountsCreateEditValidationTotalsDeletionAndRelaunch() {
+        launchResettingData()
+
+        XCTAssertTrue(app.navigationBars["Activos"].waitForExistence(timeout: 5))
+        XCTAssertTrue(element("assetsEmptyState").exists)
+
+        // Blank names and missing balances are rejected without creating an account.
+        app.buttons["addAssetAccountButton"].tap()
+        replaceText(in: "assetNameField", with: "   ")
+        app.buttons["saveAssetAccountButton"].tap()
+        XCTAssertTrue(element("assetFormError").waitForExistence(timeout: 3))
+        XCTAssertTrue(element("assetFormError").label.contains("nombre"))
+        replaceText(in: "assetNameField", with: "Inválida")
+        replaceText(in: "assetBalanceField", with: "")
+        app.buttons["saveAssetAccountButton"].tap()
+        XCTAssertTrue(element("assetFormError").label.contains("igual o mayor que cero"))
+        app.buttons["Cancelar"].tap()
+        XCTAssertTrue(element("assetsEmptyState").waitForExistence(timeout: 5))
+
+        addAssetAccount(name: "Cuenta diaria", type: "Corriente", currency: "COP", balance: "1000000,50")
+        addAssetAccount(name: "Fondo", type: "Ahorros", currency: "COP", balance: "250000,25")
+        addAssetAccount(name: "Gastos China", type: "Corriente", currency: "CNY", balance: "125,50")
+        addAssetAccount(name: "Reserva China", type: "Ahorros", currency: "CNY", balance: "50,25")
+
+        assertMoney("checkingSubtotalCOP", contains: "1.000.000,50")
+        assertMoney("savingsSubtotalCOP", contains: "250.000,25")
+        assertMoney("totalAssetsCOP", contains: "1.250.000,75")
+        assertMoney("checkingSubtotalCNY", contains: "125,50")
+        assertMoney("savingsSubtotalCNY", contains: "50,25")
+        assertMoney("totalAssetsCNY", contains: "175,75")
+
+        // Edit every account attribute and verify that totals move between type/currency groups.
+        let dailyRow = assetRow(named: "Cuenta diaria")
+        reveal(dailyRow)
+        dailyRow.tap()
+        replaceText(in: "assetNameField", with: "Cuenta principal")
+        replaceText(in: "assetBalanceField", with: "200,75")
+        dismissAssetKeyboard()
+        app.buttons["Ahorros"].tap()
+        app.buttons["CNY"].tap()
+        app.buttons["saveAssetAccountButton"].tap()
+        XCTAssertTrue(app.buttons["addAssetAccountButton"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["Cuenta principal"].waitForExistence(timeout: 5))
+        assertMoney("checkingSubtotalCOP", contains: "0,00")
+        assertMoney("savingsSubtotalCOP", contains: "250.000,25")
+        assertMoney("totalAssetsCOP", contains: "250.000,25")
+        assertMoney("checkingSubtotalCNY", contains: "125,50")
+        assertMoney("savingsSubtotalCNY", contains: "251,00")
+        assertMoney("totalAssetsCNY", contains: "376,50")
+
+        // Terminate and relaunch without resetting data: all edits and totals must persist.
+        app.terminate()
+        app.launchArguments = []
+        app.launch()
+        XCTAssertTrue(app.navigationBars["Activos"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["Cuenta principal"].waitForExistence(timeout: 5))
+        assertMoney("totalAssetsCOP", contains: "250.000,25")
+        assertMoney("totalAssetsCNY", contains: "376,50")
+
+        let reserveRow = assetRow(named: "Reserva China")
+        reveal(reserveRow)
+        reserveRow.swipeLeft()
+        app.buttons["Eliminar"].tap()
+        XCTAssertTrue(app.alerts.firstMatch.waitForExistence(timeout: 3))
+        XCTAssertTrue(app.alerts.firstMatch.staticTexts.element(boundBy: 1).label.contains("no se crean ingresos ni gastos"))
+        app.alerts.buttons["Cancelar"].tap()
+        XCTAssertTrue(assetRow(named: "Reserva China").exists)
+
+        reserveRow.swipeLeft()
+        app.buttons["Eliminar"].tap()
+        app.alerts.buttons["Eliminar cuenta"].tap()
+        XCTAssertTrue(app.staticTexts["Reserva China"].waitForNonExistence(timeout: 5))
+        assertMoney("savingsSubtotalCNY", contains: "200,75")
+        assertMoney("totalAssetsCNY", contains: "326,25")
+
+        // Manual asset records do not create planning periods or savings goals.
+        openPeriods()
+        XCTAssertTrue(element("periodsEmptyState").waitForExistence(timeout: 5))
+        app.navigationBars.buttons["Planificación"].tap()
+        element("goalsNavigationLink").tap()
+        XCTAssertTrue(element("goalsEmptyState").waitForExistence(timeout: 5))
+    }
+
     func testSavingsGoalCreateEditValidationProgressOptionalDateAndRelaunch() {
         launchResettingData()
-        app.tabBars.buttons["Metas"].tap()
+        openGoals()
 
         app.buttons["addGoalButton"].tap()
         replaceText(in: "goalNameField", with: "Emergencia")
@@ -150,7 +243,7 @@ final class ExpensesPlannerUITests: XCTestCase {
         app.terminate()
         app.launchArguments = []
         app.launch()
-        app.tabBars.buttons["Metas"].tap()
+        openGoals()
         XCTAssertTrue(app.staticTexts["Fondo emergencia"].waitForExistence(timeout: 5))
         XCTAssertTrue(app.staticTexts["50 %"].exists)
         XCTAssertTrue(app.staticTexts["Fecha objetivo"].exists)
@@ -166,6 +259,65 @@ final class ExpensesPlannerUITests: XCTestCase {
         app.buttons["Eliminar"].tap()
         app.alerts.buttons["Eliminar meta"].tap()
         XCTAssertTrue(element("goalsEmptyState").waitForExistence(timeout: 5))
+    }
+
+    private func openPeriods() {
+        app.tabBars.buttons["Planificación"].tap()
+        XCTAssertTrue(element("periodsNavigationLink").waitForExistence(timeout: 5))
+        element("periodsNavigationLink").tap()
+        XCTAssertTrue(app.navigationBars["Períodos"].waitForExistence(timeout: 5))
+    }
+
+    private func openGoals() {
+        app.tabBars.buttons["Planificación"].tap()
+        XCTAssertTrue(element("goalsNavigationLink").waitForExistence(timeout: 5))
+        element("goalsNavigationLink").tap()
+        XCTAssertTrue(app.navigationBars["Metas de ahorro"].waitForExistence(timeout: 5))
+    }
+
+    private func addAssetAccount(name: String, type: String, currency: String, balance: String) {
+        app.buttons["addAssetAccountButton"].tap()
+        replaceText(in: "assetNameField", with: name)
+        replaceText(in: "assetBalanceField", with: balance)
+        dismissAssetKeyboard()
+        app.buttons[type].tap()
+        app.buttons[currency].tap()
+        app.buttons["saveAssetAccountButton"].tap()
+        XCTAssertTrue(app.buttons["addAssetAccountButton"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts[name].waitForExistence(timeout: 5))
+    }
+
+    private func dismissAssetKeyboard() {
+        if app.keyboards.firstMatch.exists,
+           element("dismissAssetKeyboardButton").waitForExistence(timeout: 2) {
+            element("dismissAssetKeyboardButton").tap()
+            XCTAssertTrue(app.keyboards.firstMatch.waitForNonExistence(timeout: 2))
+        }
+    }
+
+    private func assetRow(named name: String) -> XCUIElement {
+        app.descendants(matching: .any)
+            .matching(NSPredicate(format: "identifier BEGINSWITH %@ AND label CONTAINS %@", "assetRow-", name))
+            .firstMatch
+    }
+
+    private func assertMoney(_ identifier: String, contains amount: String) {
+        let money = element(identifier)
+        reveal(money)
+        XCTAssertTrue(money.label.contains(amount), "Expected \(identifier) to contain \(amount), got \(money.label)")
+    }
+
+    private func reveal(_ target: XCUIElement, file: StaticString = #filePath, line: UInt = #line) {
+        if target.waitForExistence(timeout: 2), target.isHittable { return }
+        for _ in 0..<5 {
+            app.swipeUp()
+            if target.exists, target.isHittable { return }
+        }
+        for _ in 0..<8 {
+            app.swipeDown()
+            if target.exists, target.isHittable { return }
+        }
+        XCTFail("Could not reveal \(target.identifier)", file: file, line: line)
     }
 
     private func launchResettingData() {

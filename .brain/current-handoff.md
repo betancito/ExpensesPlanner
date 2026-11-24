@@ -8,7 +8,7 @@ updated: 2026-11-24
 
 ## Where we are
 
-[[features/BP-005-management-screens|BP-005]] is complete and planner-accepted. The Spanish SwiftUI management flows for flexible periods, confirmed COP incomes, obligations, and savings goals are implemented. Independent review is **PASS**: the reviewer simulator build succeeded and all 41 tests passed (38 unit, 3 UI) on iPhone 17 iOS 26.5. Goal-row editing, optional-date UI reliability, relaunch persistence, and destructive confirmations were exercised.
+[[features/BP-006-asset-accounts|BP-006]] is complete and planner-accepted. The Spanish `Activos` tab supports local checking/savings accounts in COP/CNY, manual validated balances, separate type/currency totals, confirmed CRUD, and `Planificación` navigation for periods and goals. Independent review is **PASS** with no changes required; the reviewer build succeeded and all 48 tests passed (44 unit, 4 UI) on iPhone 17 iOS 26.5.
 
 ## Active feature
 
@@ -16,7 +16,7 @@ No active feature.
 
 ## Next action
 
-Implement [[features/BP-006-asset-accounts|BP-006 local checking/savings accounts]], then [[features/BP-007-home-quick-expenses|BP-007 home metrics, rolling daily budget, and quick CNY expenses]].
+Implement [[features/BP-007-home-quick-expenses|BP-007 home metrics, rolling daily budget, and quick CNY expenses]].
 
 ## Environment confirmed
 

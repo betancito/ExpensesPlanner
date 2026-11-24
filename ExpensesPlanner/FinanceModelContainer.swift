@@ -2,6 +2,7 @@ import SwiftData
 
 enum FinanceModelContainer {
     static let modelTypes: [any PersistentModel.Type] = [
+        AssetAccount.self,
         BudgetPeriod.self,
         ConfirmedIncome.self,
         PeriodObligation.self,
@@ -18,6 +19,7 @@ enum FinanceModelContainer {
 
     #if DEBUG
     static func deleteAllLocalData(in context: ModelContext) throws {
+        try context.delete(model: AssetAccount.self)
         try context.delete(model: BudgetPeriod.self)
         try context.delete(model: ConfirmedIncome.self)
         try context.delete(model: PeriodObligation.self)

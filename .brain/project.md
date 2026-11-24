@@ -15,7 +15,7 @@ A personal iPhone app that helps the user understand and plan their expenses. Th
 
 ## Current state
 
-The repository contains a native SwiftUI/Xcode project, Spanish management workflows for flexible periods, confirmed COP incomes, obligations and savings goals, SwiftData finance models, a pure Decimal budget engine, a validated CNY/COP exchange-rate service with local caching and manual fallback, and unit/UI tests with no third-party dependencies. BP-005 passed independent review with 41 tests. Asset accounts, production home/quick-expense workflows, and exchange-rate selection UI are planned next.
+The repository contains a native SwiftUI/Xcode project, Spanish manual checking/savings asset accounts in COP/CNY, management workflows for flexible periods, confirmed COP incomes, obligations and savings goals grouped under Planificación, SwiftData finance models, a pure Decimal budget engine, a validated CNY/COP exchange-rate service with local caching and manual fallback, and unit/UI tests with no third-party dependencies. BP-005 and BP-006 are planner-accepted; BP-006 passed independent review with 48 tests. Production home/quick-expense workflows and exchange-rate selection UI remain planned.
 
 ## Development environment
 

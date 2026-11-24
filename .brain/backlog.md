@@ -10,14 +10,14 @@ Status values: `next`, `planned`, `in-progress`, `review`, `blocked`, `done`.
 - [x] **BP-003 — Local finance models and budget engine** (`done`) — [[features/BP-003-local-finance-core|feature note and review evidence]].
 - [x] **BP-004 — Public, cached, and manual CNY-COP exchange rates** (`done`) — [[features/BP-004-exchange-rates|feature note and review evidence]].
 - [x] **BP-005 — Income, period, obligation, and savings-goal management screens** (`done`) — [[features/BP-005-management-screens|feature note and review evidence]].
+- [x] **BP-006 — Local checking and savings asset accounts** (`done`) — [[features/BP-006-asset-accounts|feature note and review evidence]].
 
 ## In progress
 
 No active feature.
 
 ## Next
-- [ ] **BP-006 — Local checking and savings asset accounts** (`next`) — [[features/BP-006-asset-accounts|feature note]].
-- [ ] **BP-007 — Home metrics, rolling daily budget, and quick CNY expenses** (`planned`) — [[features/BP-007-home-quick-expenses|feature note]].
+- [ ] **BP-007 — Home metrics, rolling daily budget, and quick CNY expenses** (`next`) — [[features/BP-007-home-quick-expenses|feature note]].
 
 ## Later
 
